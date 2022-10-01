@@ -11,12 +11,10 @@ app.use(express.json());
 app.post("/create-payment-intent", async (req, res) => {
   const { amount, currency } = req.body;
 
-  console.log("=====> REQ ", req)
-
   const payableAmount = parseInt(amount) * 100;
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: 2000,
-    currency: 'usd' // put your currency
+    amount: payableAmount,
+    currency: currency // put your currency
   });
 
   res.send({
